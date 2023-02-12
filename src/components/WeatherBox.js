@@ -1,6 +1,6 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
-function WeatherBox() {
+function WeatherBox({ location }) {
   return (
     <div>
       <Box
@@ -11,8 +11,14 @@ function WeatherBox() {
         borderRadius="3xl"
         borderWidth="2px"
         margin="10px"
+        display="flex"
+        flexDirection="column"
+        boxShadow="lg"
       >
-        Tu bedzie Switch i pogoda
+        <Text fontSize="4xl" as="b">
+          30&deg;
+        </Text>
+        <Text fontSize="lg">{location}</Text>
       </Box>
     </div>
   );
