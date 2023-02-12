@@ -1,9 +1,12 @@
 import "./App.css";
+import LocationInput from "./components/LocationInput";
+import WeatherBox from "./components/WeatherBox";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <LocationInput></LocationInput>
+      <WeatherBox></WeatherBox>
     </div>
   );
 }
