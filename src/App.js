@@ -9,7 +9,7 @@ function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState(" ");
 
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=a584f3ad71cf0eba751f6f5c24a5161d
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=
 
   `;
 
