@@ -8,18 +8,36 @@ import { Input, Box, Text } from "@chakra-ui/react";
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState(" ");
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
 
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=
+  // const API_KEY = process.env.REACT_APP_API_KEY;
 
-  `;
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
 
   const searchLocation = (event) => {
     if (event.key === "Enter")
-      axios.get(url).then((response) => {
-        setData(response.data);
-        console.log(response.data);
-      });
+      axios
+        .get(url)
+        .then((response) => {
+          setData(response.data[0]);
+          setLat(response.data[0].lat);
+          setLon(response.data[0].lon);
+          console.log(response.data[0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   };
+
+  console.log(lat);
+  console.log(lon);
+
+  const [temperature, setTemperature] = useState("");
+
+  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
+
+  // console.log(url_weather);
 
   return (
     <>
@@ -54,7 +72,8 @@ function App() {
             30&deg;
           </Text>
           <Text fontSize="lg">{location}</Text>
-          <Text fontSize="lg">{data.lat}</Text>
+          <Text>{data.lat}</Text>
+          <Text>{data.lon}</Text>
         </Box>
       </div>
     </>
