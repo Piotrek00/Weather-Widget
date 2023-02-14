@@ -13,7 +13,7 @@ function App() {
 
   // const API_KEY = process.env.REACT_APP_API_KEY;
 
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=`;
 
   const searchLocation = (event) => {
     if (event.key === "Enter")
@@ -35,7 +35,7 @@ function App() {
 
   const [temperature, setTemperature] = useState("");
 
-  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
+  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=`;
 
   // console.log(url_weather);
 
