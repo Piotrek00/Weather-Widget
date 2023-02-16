@@ -1,6 +1,5 @@
 import "./App.css";
-// import WeatherBox from "./components/WeatherBox";
-// import LocationInput from "./components/LocationInput";
+
 import { useState } from "react";
 import axios from "axios";
 import { Input, Box, Text } from "@chakra-ui/react";
@@ -10,10 +9,12 @@ function App() {
   const [location, setLocation] = useState(" ");
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
 
   // const API_KEY = process.env.REACT_APP_API_KEY;
 
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=`;
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
 
   const searchLocation = (event) => {
     if (event.key === "Enter")
@@ -23,6 +24,8 @@ function App() {
           setData(response.data[0]);
           setLat(response.data[0].lat);
           setLon(response.data[0].lon);
+          setCountry(response.data[0].country);
+          setState(response.data[0].state);
           console.log(response.data[0]);
         })
         .catch((error) => {
@@ -30,14 +33,20 @@ function App() {
         });
   };
 
-  console.log(lat);
-  console.log(lon);
+  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
+  const [temperature, setTemperature] = useState(" ");
 
-  const [temperature, setTemperature] = useState("");
+  axios.get(url_weather).then((res) => {
+    setTemperature(res.data.main.temp);
+    setCountry(res.data.sys.country);
+    console.log(res.data);
+  });
 
-  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=`;
+  // Convert from Kelvin to Celcius
+  const cTemp = Math.round(temperature - 273.15);
 
-  // console.log(url_weather);
+  // Convert from Celcius to Farenheit
+  const fTemp = Math.round(cTemp * 1.8 + 32);
 
   return (
     <>
@@ -69,11 +78,18 @@ function App() {
           boxShadow="lg"
         >
           <Text fontSize="4xl" as="b">
-            30&deg;
+            {cTemp}&deg;C
           </Text>
-          <Text fontSize="lg">{location}</Text>
-          <Text>{data.lat}</Text>
-          <Text>{data.lon}</Text>
+
+          <Text fontSize="4xl" as="b">
+            {fTemp}&deg;F
+          </Text>
+
+          <Text fontSize="lg">
+            {location}, {country}
+          </Text>
+
+          <Text fontSize="sm">{state}</Text>
         </Box>
       </div>
     </>
