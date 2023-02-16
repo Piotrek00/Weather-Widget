@@ -1,8 +1,7 @@
 import "./App.css";
-
 import { useState } from "react";
 import axios from "axios";
-import { Input, Box, Text } from "@chakra-ui/react";
+import { Input, Box, Text, Stack, Switch } from "@chakra-ui/react";
 
 function App() {
   const [data, setData] = useState({});
@@ -12,9 +11,9 @@ function App() {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
 
-  // const API_KEY = process.env.REACT_APP_API_KEY;
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=${API_KEY}`;
 
   const searchLocation = (event) => {
     if (event.key === "Enter")
@@ -33,7 +32,7 @@ function App() {
         });
   };
 
-  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
+  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
   const [temperature, setTemperature] = useState(" ");
 
   axios.get(url_weather).then((res) => {
@@ -77,6 +76,9 @@ function App() {
           flexDirection="column"
           boxShadow="lg"
         >
+          <Stack>
+            <Switch size="lg" colorScheme="whiteAlpha"></Switch>
+          </Stack>
           <Text fontSize="4xl" as="b">
             {cTemp}&deg;C
           </Text>
