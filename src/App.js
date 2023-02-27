@@ -6,14 +6,14 @@ import { Input, Box, Text, Stack, Switch } from "@chakra-ui/react";
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState(" ");
-  const [lat, setLat] = useState("");
-  const [lon, setLon] = useState("");
+  const [lat, setLat] = useState(0);
+  const [lon, setLon] = useState(0);
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
 
   const API_KEY = process.env.REACT_APP_API_KEY;
 
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=${API_KEY}`;
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${1}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
 
   const searchLocation = (event) => {
     if (event.key === "Enter")
@@ -32,12 +32,12 @@ function App() {
         });
   };
 
-  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-  const [temperature, setTemperature] = useState(" ");
+  const url_weather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a584f3ad71cf0eba751f6f5c24a5161d`;
+  const [temperature, setTemperature] = useState(0);
 
   axios.get(url_weather).then((res) => {
     setTemperature(res.data.main.temp);
-    setCountry(res.data.sys.country);
+    // setCountry(res.data.sys.country);
     console.log(res.data);
   });
 
